@@ -4,6 +4,7 @@ const connection = require("./db");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
+const cors = require('cors');
 const app = express();
 
 const users = require("./routes/users");
@@ -12,14 +13,20 @@ const auth = require("./routes/auth");
 
 connection();
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
+app.use(cors({
+    origin: ['http://localhost:8100', "http://127.0.0.1:8100", "http://192.168.0.95:8100"],
+    credentials: true
+}));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    secure: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 24 * 60 * 60
+        secure: false,
+        httpOnly: true,
+        sameSite: 'Strict',
+        maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
 }));
 

@@ -1,20 +1,33 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {IonicModule} from "@ionic/angular";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {RegisterUserComponent} from "./register-user/register-user.component";
+import {UsersService} from "../services/users.service";
+import {UsersImplService} from "../services/users-impl.service";
+import {ToastManager} from "./toast-manager.component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    ReactiveFormsModule,
+    IonicModule,
   ],
   declarations: [
-    NotFoundComponent
+    NotFoundComponent,
+    RegisterUserComponent,
   ],
   exports: [
-    NotFoundComponent
+    NotFoundComponent,
+    RegisterUserComponent,
+  ],
+  providers: [
+    {
+      provide: UsersService,
+      useClass: UsersImplService
+    }
   ]
 })
 export class SharedModule {

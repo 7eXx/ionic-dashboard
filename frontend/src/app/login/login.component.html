@@ -1,3 +1,47 @@
-<p>
-  login works!
-</p>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid class="login-container">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <h1><b>Login</b></h1>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="loginForm">
+              <div *ngIf="isLoginFailed | async" class="alert alert-danger">Login failed, check credentials.</div>
+              <ion-input class="ion-margin-vertical"
+                         type="email"
+                         placeholder="Email"
+                         aria-label="email"
+                         fill="outline"
+                         name="email"
+                         formControlName="email"></ion-input>
+              <ion-input class="ion-margin-vertical"
+                         type="password"
+                         placeholder="Password"
+                         aria-label="password"
+                         fill="outline"
+                         name="password"
+                         formControlName="password"></ion-input>
+              <ion-button class="ion-margin"
+                          type="button"
+                          expand="block"
+                          size="large"
+                          (click)="onLogin()">Login</ion-button>
+            </form>
+            <div>
+              <ion-button class="ion-margin"
+                          type="button"
+                          expand="block"
+                          size="small"
+                          color="medium"
+                          (click)="onRegisterUserModal()">Not a user?</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

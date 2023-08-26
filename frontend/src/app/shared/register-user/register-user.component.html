@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>User registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding d-flex justify-content-center align-items-center">
+    <div *ngIf="(errorMessage | async) as message"
+        class="alert alert-danger">
+        {{ message }}
+    </div>
+    <form [formGroup]="registerForm">
+        <ion-item>
+            <ion-input label="Email"
+                         label-placement="floating"
+                         fill="solid"
+                         aria-label="email"
+                         name="email"
+                         type="email"
+                         formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input label="Password"
+                         label-placement="floating"
+                         fill="solid"
+                         aria-label="password"
+                         name="password"
+                         type="password"
+                         formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input label="Confirm password"
+                         label-placement="floating"
+                         fill="solid"
+                         aria-label="confirmPassword"
+                         name="confirmPassword"
+                         type="password"
+                         formControlName="confirmPassword"></ion-input>
+        </ion-item>
+    </form>
+    <div class="d-flex justify-content-center align-items-center">
+        <ion-button class="ion-margin"
+                    type="button"
+                    size="large"
+                    (click)="onSave()">
+          <ion-icon name="save" class="ion-padding-end"></ion-icon>
+          Save
+        </ion-button>
+    </div>
+</ion-content>
