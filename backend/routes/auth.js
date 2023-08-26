@@ -33,12 +33,12 @@ router.post("/login", async (req, res) => {
             return res.status(400).send("Invalid email or password");
         }
 
-        req.session.user = {
+        req.session.sessionInfo = {
             _id: user._id,
             email: user.email
         };
 
-        res.send("User logged in successfully!!!");
+        res.send({ id: user._id, email: user.email });
     } catch (error) {
         console.log(error);
         res.send("An error occured");
@@ -50,7 +50,7 @@ router.get("/logout", auth, async (req, res, next) => {
         console.log("Destroyed session");
     });
 
-    res.send("User logged out");
+    res.send({ state: "logout" });
 });
 
 const validate = (user) => {

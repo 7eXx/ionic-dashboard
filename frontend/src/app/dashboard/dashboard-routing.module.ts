@@ -6,32 +6,41 @@ import {ItemsComponent} from "./items/items.component";
 import {UsersComponent} from "./users/users.component";
 import {NotesComponent} from "./notes/notes.component";
 import {NotFoundComponent} from "../shared/not-found/not-found.component";
+import {canActivateAuth} from "../core/auth.guard";
+import {LayoutContainerComponent} from "./layout-container/layout-container.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'users',
-    component: UsersComponent
-  },
-  {
-    path: 'items',
-    component: ItemsComponent
-  },
-  {
-    path: 'notes',
-    component: NotesComponent
-  },
-  {
-    path: '**',
-    component: NotFoundComponent
+    component: LayoutContainerComponent,
+    canActivate: [canActivateAuth],
+    children: [
+      {
+        path: '',
+        pathMatch: "full",
+        redirectTo: 'home'
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+      },
+      {
+        path: 'items',
+        component: ItemsComponent,
+      },
+      {
+        path: 'notes',
+        component: NotesComponent,
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
+      }
+    ]
   }
 ];
 

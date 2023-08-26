@@ -8,12 +8,14 @@ router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body);
         if (error) {
-            return res.status(400).send(error.details[0].message);
+            return res.status(400).send({ 
+                errorMessage: error.details[0].message
+            });
         }
 
         const findUser = await User.findOne({email: req.body.email});
         if (findUser) {
-            return res.status(400).send("User already exists!");
+            return res.status(400).send({ errorMessage: "User already exists!" });
         }
 
         const user = new User(req.body);
@@ -25,7 +27,7 @@ router.post("/", async (req, res) => {
         res.send(user);
     } catch (error) {
         console.log(error);
-        res.send("An error occured");
+        res.send({ errorMessage: error.message });
     }
 });
 
