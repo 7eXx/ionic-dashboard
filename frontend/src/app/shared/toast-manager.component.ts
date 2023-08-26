@@ -32,10 +32,14 @@ export class ToastManager {
   }
 
   public async showGenericError() {
+    await this.showErrorWithMessage('Operation errors. Check logs.');
+  }
+
+  public async showErrorWithMessage(message: string) {
     const toast = await this.toastController.create({
       cssClass: 'danger-toast',
-      icon: 'bug',
-      message: 'Operation errors. Check logs.',
+      icon: 'close-circle',
+      message: message,
       duration: ToastManager.DURATION,
       position: "bottom",
     });

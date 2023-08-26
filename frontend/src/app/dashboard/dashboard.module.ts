@@ -11,6 +11,7 @@ import {UsersComponent} from "./users/users.component";
 import {ItemsComponent} from "./items/items.component";
 import {NotesComponent} from "./notes/notes.component";
 import {LayoutContainerComponent} from "./layout-container/layout-container.component";
+import {UserItemComponent} from "./users/user-item/user-item.component";
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import {LayoutContainerComponent} from "./layout-container/layout-container.comp
     LayoutContainerComponent,
     HomeComponent,
     UsersComponent,
+    UserItemComponent,
     ItemsComponent,
     NotesComponent,
   ]

@@ -14,8 +14,47 @@
       <ion-title size="large">Users</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div>
-    <p>Users works!</p>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab class="ion-margin" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="onAddNewUser()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="table-responsive" *ngIf="users.length > 0; else noElement">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th class="text-nowrap">Creation time</th>
+          <th class="text-nowrap">Last login time</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.email }}</td>
+          <td class="text-nowrap">{{ user.creationDatetime }}</td>
+          <td class="text-nowrap">{{ user.lastLoginDatetime }}</td>
+          <td>
+            <ion-button [color]="user.enabled ? 'danger' : 'success'"
+                    (click)="onToggleEnable(user)">{{ user.enabled ? 'Disable' : 'Enable' }}</ion-button>
+          </td>
+        </tr>
+      </tbody>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
   </div>
+
+  <ng-template #noElement>
+    <div class="dflex justify-content-center align-items-center">
+      <ion-text color="primary">
+        <h2>No users found.</h2>
+      </ion-text>
+    </div>
+  </ng-template>
+
 </ion-content>

@@ -2,8 +2,10 @@ import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 
 export interface SessionInfo {
-  id: string;
+  _id: string;
   email: string;
+  creationDatetime: string;
+  enabled: boolean;
 }
 
 export interface AuthEvent {

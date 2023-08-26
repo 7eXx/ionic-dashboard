@@ -21,4 +21,13 @@ export class UsersImplService extends UsersService {
             withCredentials: true
         });
     }
+
+    public override setUserStatus(user: User, newStatusEnabled: boolean) {
+        return this.httpClient.put<User>(environment.url + '/users/status', {
+            id: user._id,
+            enabled: newStatusEnabled
+        }, {
+            withCredentials: true
+        });
+    }
 }
