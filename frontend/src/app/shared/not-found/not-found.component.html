@@ -3,19 +3,19 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ page }}</ion-title>
+    <ion-title>Not found</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ page }}</ion-title>
+      <ion-title size="large">Not Found</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ page }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="not-found">
+    <h1>404 - Page Not Found</h1>
+    <p>The page you're looking for doesn't exist.</p>
   </div>
 </ion-content>
