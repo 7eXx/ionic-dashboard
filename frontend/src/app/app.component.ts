@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {logOut} from "ionicons/icons";
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,13 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Home', url: '/dashboard/home', icon: 'home' },
+    { title: 'Users', url: '/dashboard/users', icon: 'people' },
+    { title: 'Items', url: '/dashboard/items', icon: 'pricetags' },
+    { title: 'Notes', url: '/dashboard/notes', icon: 'documents' }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {}
+
+  onLogout() {
+    console.log("clicked logout");
+  }
+
+  protected readonly logOut = logOut;
 }

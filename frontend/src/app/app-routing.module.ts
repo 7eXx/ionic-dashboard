@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {LoginComponent} from "./login/login.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'dashboard/home',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.FolderPageModule)
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
