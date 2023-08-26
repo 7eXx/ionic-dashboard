@@ -22,11 +22,11 @@ ion-menu.md ion-note {
   padding-left: 10px;
 }
 
-ion-menu.md ion-list#inbox-list {
+ion-menu.md ion-list#dashboard-list {
   border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
 }
 
-ion-menu.md ion-list#inbox-list ion-list-header {
+ion-menu.md ion-list#dashboard-list ion-list-header {
   font-size: 22px;
   font-weight: 600;
 
@@ -116,4 +116,9 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+
+.logout:hover {
+  --background: rgba(175, 175, 175, 0.34);
+  cursor: pointer;
 }
