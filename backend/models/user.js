@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Joi = require("joi");
+const { string } = require("joi");
+const dateFormatter = require("../utils/data-formatter");
 
 const userSchema = new Schema({
     email: {
@@ -10,6 +12,14 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
+    },
+    creationDatetime: {
+        type: String,
+        default: dateFormatter.formatCustom(new Date())
+    },
+    lastLoginDatetime: {
+        type: String,
+        default: ''
     },
     enabled: {
         type: Boolean,
@@ -23,7 +33,9 @@ const validate = (user) => {
     const schema = Joi.object({
         email: Joi.string().required(),
         password: Joi.string().required(),
-        enabled: Joi.boolean()
+        creationDatetime: Joi.string(),
+        lastLoginDatetime: Joi.string(),
+        enabled: Joi.boolean(),
     });
     return schema.validate(user);
 };
