@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User, UsersService} from "../../services/users.service";
 import {Observable, Subscription} from "rxjs";
 import {RegisterUserComponent} from "../../shared/register-user/register-user.component";
-import {ModalController, ToastController} from "@ionic/angular";
+import {AlertController, ModalController, ToastController} from "@ionic/angular";
 import {ToastManager} from "../../shared/toast-manager.component";
 
 @Component({
@@ -19,6 +19,7 @@ export class UsersComponent  implements OnInit, OnDestroy {
 
   constructor(private modalController: ModalController,
               private toastController: ToastController,
+              private alertController: AlertController,
               private usersService: UsersService) {
     this.toastManager = new ToastManager(toastController);
     this.subscribeUsers();
@@ -64,7 +65,26 @@ export class UsersComponent  implements OnInit, OnDestroy {
     }
   }
 
-  public onToggleEnable(user: User) {
+  async onToggleEnable(user: User) {
+    const alert = await this.alertController.create({
+      header: 'Confirm operation',
+      message: 'Proceed with the operation?',
+      buttons: [{
+        text: 'Ok',
+        role: 'confirm',
+        handler: () => {
+          this.sendUserStatus(user, !user.enabled);
+        }
+      }, {
+        text: 'Cancel',
+        role: 'cancel'
+      }]
+    });
+
+    await alert.present();
+  }
+
+  private sendUserStatus(user: User, newStatusEnabled: boolean) {
     this.usersService.setUserStatus(user, !user.enabled).subscribe({
       next: (user) => {
         this.refresh({});
