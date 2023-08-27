@@ -16,6 +16,9 @@ import {NoteDetailComponent} from "./notes/note-detail/note-detail.component";
 import {ItemRecordComponent} from "./items/item-record/item-record.component";
 import {ItemDetailsComponent} from "./items/item-details/item-details.component";
 import {AngularEditorModule} from "@kolkov/angular-editor";
+import {UsersTileComponent} from "./tiles/users-tile/users-tile.component";
+import {ItemsTileComponent} from "./tiles/items-tile/items-tile.component";
+import {NotesTileComponent} from "./tiles/notes-tile/notes-tile.component";
 
 @NgModule({
   imports: [
@@ -35,7 +38,10 @@ import {AngularEditorModule} from "@kolkov/angular-editor";
     NoteDetailComponent,
     ItemsComponent,
     ItemRecordComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    UsersTileComponent,
+    ItemsTileComponent,
+    NotesTileComponent
   ]
 })
 export class FolderPageModule {}

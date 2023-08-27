@@ -1,0 +1,30 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      <h2 class="fw-bold">{{ title }}</h2>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div *ngIf="(usersObs | async) as user; else noUsers">
+      <ion-list>
+        <ion-item>
+          <ion-label class="fw-bold">Total: </ion-label>
+          <ion-badge slot="end">{{ user.length }}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label class="fw-bold">Enabled: </ion-label>
+          <ion-badge slot="end" color="success">{{ (enabledUsersObs | async)?.length }}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label class="fw-bold">Disabled: </ion-label>
+          <ion-badge slot="end" color="danger">{{ (disabledUsersObs | async)?.length }}</ion-badge>
+        </ion-item>
+      </ion-list>
+    </div>
+    <ng-template #noUsers>
+      <ion-label>
+
+      </ion-label>
+    </ng-template>
+  </ion-card-content>
+</ion-card>
