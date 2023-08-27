@@ -25,6 +25,11 @@
   display: flex;
 }
 
+.full-space {
+  height: 100%;
+  width: 100%;
+}
+
 .success-toast {
   --background: #00c71f;
   --color: #ffffff;

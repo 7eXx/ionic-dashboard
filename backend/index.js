@@ -9,6 +9,7 @@ const app = express();
 
 const users = require("./routes/users");
 const auth = require("./routes/auth");
+const notes = require("./routes/notes");
 
 
 connection();
@@ -30,8 +31,9 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use("/api/users", users);
+app.use("/api/notes", notes);
 
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => console.log(`Listening on port ${port}...`));

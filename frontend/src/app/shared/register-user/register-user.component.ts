@@ -40,11 +40,7 @@ export class RegisterUserComponent  implements OnInit, OnDestroy {
     return this.modalController.dismiss(null, 'cancel');
   }
 
-  public confirm() {
-    return this.modalController.dismiss(null, 'confirm');
-  }
-
-  onSave() {
+  public onSave() {
     if (!this.registerForm.valid) {
       this.errorMessage.next('Some fields are not valid!');
       return;

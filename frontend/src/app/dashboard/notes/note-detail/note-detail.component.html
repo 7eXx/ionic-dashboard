@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancel()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="d-flex justify-content-center align-items-center">
+    <div #content style="height: 100%; width: 100%" class="ion-padding">
+        <div *ngIf="(errorMessage | async) as message"
+            class="alert alert-danger">
+            {{ message }}
+        </div>
+        <form [formGroup]="noteForm">
+            <ion-grid class="ion-padding-horizontal">
+              <ion-row class="ion-align-items-center">
+                <ion-col size="auto">
+                  <ion-icon aria-hidden="true" name="pencil" size="small"></ion-icon>
+                </ion-col>
+                <ion-col>
+                  <ion-input label="Title"
+                             label-placement="floating"
+                             fill="outline"
+                             aria-label="title"
+                             name="title"
+                             formControlName="title"></ion-input>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col size="auto">
+                  <ion-icon aria-hidden="true" name="reader" size="small"></ion-icon>
+                </ion-col>
+                <ion-col>
+                  <ion-textarea label="Description"
+                            label-placement="floating"
+                            fill="outline"
+                            aria-label="description"
+                            name="Description"
+                            formControlName="description"
+                            [rows]="10"></ion-textarea>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col size="auto">
+                  <ion-icon aria-hidden="true" name="color-palette" size="small"></ion-icon>
+                </ion-col>
+                <ion-col>
+                  <input type="color" class="form-control"
+                         formControlName="color">
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </form>
+        <div class="d-flex justify-content-center align-items-center">
+            <ion-button class="ion-margin"
+                        type="button"
+                        size="large"
+                        (click)="onSave()">
+              <ion-icon name="save" class="ion-padding-end"></ion-icon>
+              Save
+            </ion-button>
+        </div>
+    </div>
+</ion-content>

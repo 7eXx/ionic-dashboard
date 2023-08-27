@@ -24,13 +24,14 @@ router.post("/", async (req, res) => {
 
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         user.password = await bcrypt.hash(user.password, salt);
+        user.creationDatetime = dateFormatter.formatCustom(new Date());
 
         await user.save();
 
         res.send(user);
     } catch (error) {
         console.log(error);
-        res.send({ errorMessage: error.message });
+        res.status(500).send({ errorMessage: error.message });
     }
 });
 
@@ -41,7 +42,7 @@ router.get("/", auth, async (req, res) => {
         res.send(users);
     } catch (error) {
         console.log(error);
-        res.send({ errorMessage: error.message });
+        res.status(500).send({ errorMessage: error.message });
     }
 });
 
@@ -63,22 +64,22 @@ router.put("/status", auth, async (req, res) => {
         }
 
         findUser.enabled = req.body.enabled;
-        findUser.save();
+        await findUser.save();
 
         res.send(findUser);
     } catch (error) {
         console.log(error);
-        res.send({ errorMessage: error.message });
+        res.status(500).send({ errorMessage: error.message });
     }
 });
 
 router.get("/me", auth, async (req, res) => {
     try {
-        const user = await User.findById(req.session.user._id).select("-password -__v");
+        const user = await User.findById(req.session.user._id);
         res.send(user);
     } catch (error) {
         console.log(error);
-        res.send("An error occured");
+        res.status(500).send({ errorMessage: error.message });
     }
 });
 
