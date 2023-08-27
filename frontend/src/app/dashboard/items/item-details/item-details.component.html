@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding d-flex justify-content-center ion-align-items-center">
+  <div *ngIf="(errorMessage | async) as message"
+      class="alert alert-danger">
+      {{ message }}
+  </div>
+  <form [formGroup]="itemForm">
+      <ion-grid class="ion-padding-horizontal">
+        <ion-row class="ion-padding-vertical ion-align-items-center">
+          <ion-col size="auto">
+            <ion-icon aria-hidden="true" name="pencil" size="small"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-input label="Title"
+                       label-placement="floating"
+                       fill="outline"
+                       aria-label="title"
+                       name="title"
+                       formControlName="title"></ion-input>
+          </ion-col>
+        </ion-row>
+        <!-- here the editor -->
+        <ion-row class="ion-padding-vertical ion-align-items-center">
+          <ion-col size="12">
+            <angular-editor [config]="editorConfig"
+                            formControlName="content"></angular-editor>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding-vertical ion-align-items-center">
+          <ion-col size="auto">
+            <ion-icon aria-hidden="true" name="link" size="small"></ion-icon>
+          </ion-col>
+          <ion-col>
+             <ion-input label="Link"
+                       label-placement="floating"
+                       fill="outline"
+                       aria-label="link"
+                       name="link"
+                       formControlName="link"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding-vertical ion-align-items-center">
+          <ion-col size="auto">
+            <ion-icon aria-hidden="true" name="cloud-upload" size="small"></ion-icon>
+          </ion-col>
+          <ion-col class="ion-padding-start">
+            <ion-checkbox labelPlacement="start"
+                          formControlName="published">Published</ion-checkbox>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </form>
+  <div class="d-flex justify-content-center align-items-center">
+      <ion-button class="ion-margin"
+                  type="button"
+                  size="large"
+                  (click)="onSave()">
+        <ion-icon name="save" class="ion-padding-end"></ion-icon>
+        Save
+      </ion-button>
+  </div>
+</ion-content>

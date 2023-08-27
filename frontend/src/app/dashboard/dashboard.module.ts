@@ -14,6 +14,8 @@ import {LayoutContainerComponent} from "./layout-container/layout-container.comp
 import {NoteRecordComponent} from "./notes/note-record/note-record.component";
 import {NoteDetailComponent} from "./notes/note-detail/note-detail.component";
 import {ItemRecordComponent} from "./items/item-record/item-record.component";
+import {ItemDetailsComponent} from "./items/item-details/item-details.component";
+import {AngularEditorModule} from "@kolkov/angular-editor";
 
 @NgModule({
   imports: [
@@ -22,6 +24,7 @@ import {ItemRecordComponent} from "./items/item-record/item-record.component";
     IonicModule,
     DashboardPageRoutingModule,
     ReactiveFormsModule,
+    AngularEditorModule
   ],
   declarations: [
     LayoutContainerComponent,
@@ -32,6 +35,7 @@ import {ItemRecordComponent} from "./items/item-record/item-record.component";
     NoteDetailComponent,
     ItemsComponent,
     ItemRecordComponent,
+    ItemDetailsComponent
   ]
 })
 export class FolderPageModule {}

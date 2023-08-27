@@ -4,6 +4,7 @@ import {Item, ItemsService} from "../../services/items.service";
 import {AlertController, ToastController} from "@ionic/angular";
 import {Subscription} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-items',
@@ -17,7 +18,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   items: Array<Item> = [];
   itemsSubscription?: Subscription;
 
-  constructor(private toastController: ToastController,
+  constructor(private router: Router,
+              private toastController: ToastController,
               private alertController: AlertController,
               private itemsService: ItemsService) {
     this.toastManager = new ToastManager(toastController);
@@ -50,8 +52,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.subscribeItems()
   }
 
-  onAddItem() {
-
+  public onAddItem() {
+    this.router.navigate(['dashboard', 'items', 'new']);
   }
 
   async onDeleteItem(item: Item) {

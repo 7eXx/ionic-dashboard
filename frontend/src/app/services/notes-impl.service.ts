@@ -2,7 +2,7 @@ import {Observable, of} from "rxjs";
 import {Note, NotesService} from "./notes.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {NoteModel} from "../datastructure/note.model";
+import {NoteModel} from "../dashboard/datastructure.model";
 import {Injectable} from "@angular/core";
 
 @Injectable()

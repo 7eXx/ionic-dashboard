@@ -1,5 +1,5 @@
 import {Observable} from "rxjs";
-import {NoteModel} from "../datastructure/note.model";
+import {NoteModel} from "../dashboard/datastructure.model";
 import {Injectable} from "@angular/core";
 
 export interface Note {
