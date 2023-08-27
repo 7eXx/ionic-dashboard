@@ -3,6 +3,8 @@ const auth = require("../middleware/auth");
 const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
+const dateFormatter = require("../utils/data-formatter");
+const { boolean } = require("joi");
 
 router.post("/", async (req, res) => {
     try {
@@ -22,6 +24,7 @@ router.post("/", async (req, res) => {
 
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         user.password = await bcrypt.hash(user.password, salt);
+
         await user.save();
 
         res.send(user);
@@ -38,7 +41,34 @@ router.get("/", auth, async (req, res) => {
         res.send(users);
     } catch (error) {
         console.log(error);
-        res.send("An error occurred");
+        res.send({ errorMessage: error.message });
+    }
+});
+
+router.put("/status", auth, async (req, res) => {
+    try {
+        if (!req.body.hasOwnProperty('id') || !req.body.hasOwnProperty('enabled')) {
+            return res.status(400).send({errorMessage: 'Change status missing arguments'});
+        }
+        if (!req.body.enabled instanceof boolean) {
+            return res.status(400).send({errorMessage: 'Enable argument type not valid'});
+        }
+
+        const findUser = await User.findById(req.body.id);
+        if (!findUser) {
+            return res.status(400).send({errorMessage: 'User not found'});
+        }
+        if (findUser.id === req.session.user._id) {
+            return res.status(400).send({errorMessage: 'Cannot change status for current user'});
+        }
+
+        findUser.enabled = req.body.enabled;
+        findUser.save();
+
+        res.send(findUser);
+    } catch (error) {
+        console.log(error);
+        res.send({ errorMessage: error.message });
     }
 });
 
