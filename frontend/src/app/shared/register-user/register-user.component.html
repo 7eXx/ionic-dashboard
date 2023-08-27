@@ -9,46 +9,63 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding d-flex justify-content-center align-items-center">
-    <div *ngIf="(errorMessage | async) as message"
-        class="alert alert-danger">
-        {{ message }}
-    </div>
-    <form [formGroup]="registerForm">
-        <ion-item>
-            <ion-input label="Email"
-                         label-placement="floating"
-                         fill="solid"
-                         aria-label="email"
-                         name="email"
-                         type="email"
-                         formControlName="email"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input label="Password"
-                         label-placement="floating"
-                         fill="solid"
-                         aria-label="password"
-                         name="password"
-                         type="password"
-                         formControlName="password"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input label="Confirm password"
-                         label-placement="floating"
-                         fill="solid"
-                         aria-label="confirmPassword"
-                         name="confirmPassword"
-                         type="password"
-                         formControlName="confirmPassword"></ion-input>
-        </ion-item>
-    </form>
-    <div class="d-flex justify-content-center align-items-center">
-        <ion-button class="ion-margin"
-                    type="button"
-                    size="large"
-                    (click)="onSave()">
-          <ion-icon name="save" class="ion-padding-end"></ion-icon>
-          Save
-        </ion-button>
-    </div>
+  <div *ngIf="(errorMessage | async) as message"
+       class="alert alert-danger">
+    {{ message }}
+  </div>
+  <form [formGroup]="registerForm">
+    <ion-grid class="ion-padding-horizontal">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="auto">
+          <ion-icon aria-hidden="true" name="mail" size="small"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-input label="Email"
+                   label-placement="floating"
+                   fill="outline"
+                   aria-label="email"
+                   name="email"
+                   type="email"
+                   formControlName="email"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="auto">
+          <ion-icon aria-hidden="true" name="key" size="small"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-input label="Password"
+                   label-placement="floating"
+                   fill="outline"
+                   aria-label="password"
+                   name="password"
+                   type="password"
+                   formControlName="password"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="auto">
+          <ion-icon aria-hidden="true" name="key" size="small"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-input label="Confirm password"
+                   label-placement="floating"
+                   fill="outline"
+                   aria-label="confirmPassword"
+                   name="confirmPassword"
+                   type="password"
+                   formControlName="confirmPassword"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <div class="d-flex justify-content-center align-items-center">
+    <ion-button class="ion-margin"
+                type="button"
+                size="large"
+                (click)="onSave()">
+      <ion-icon name="save" class="ion-padding-end"></ion-icon>
+      Save
+    </ion-button>
+  </div>
 </ion-content>

@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {NotFoundComponent} from "./shared/not-found/not-found.component";
 import {LogoutComponent} from "./logout/logout.component";
+import {canActivateAuth} from "./core/auth.guard";
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent,
+    canActivate: [canActivateAuth]
   },
   {
     path: '**',

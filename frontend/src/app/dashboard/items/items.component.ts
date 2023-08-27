@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ToastManager} from "../../shared/toast-manager.component";
 import {Item, ItemsService} from "../../services/items.service";
 import {AlertController, ToastController} from "@ionic/angular";
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss'],
 })
-export class ItemsComponent implements OnInit, OnDestroy {
+export class ItemsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private toastManager: ToastManager;
 
@@ -27,6 +27,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeItems();
+  }
+
+  ngAfterViewInit() {
   }
 
   ngOnDestroy() {
@@ -50,10 +53,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
   public reload() {
     this.unsubscribeItems();
     this.subscribeItems()
-  }
-
-  public onAddItem() {
-    this.router.navigate(['dashboard', 'items', 'new']);
   }
 
   async onDeleteItem(item: Item) {

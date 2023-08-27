@@ -1,4 +1,4 @@
-import {Component, Host, OnInit, Optional} from '@angular/core';
+import {Component, Host, OnDestroy, OnInit, Optional} from '@angular/core';
 import {AuthService} from "../core/auth.service";
 import {BehaviorSubject, filter, map, Observable, Subscription, switchMap} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -12,7 +12,7 @@ import {ToastManager} from "../shared/toast-manager.component";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent  implements OnInit {
+export class LoginComponent  implements OnInit, OnDestroy {
 
   toastManager: ToastManager;
 
@@ -31,6 +31,7 @@ export class LoginComponent  implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoginFailed.next(false);
   }
 
   private setupForm() {

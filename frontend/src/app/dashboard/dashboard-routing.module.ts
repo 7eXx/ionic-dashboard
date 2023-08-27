@@ -34,7 +34,7 @@ const routes: Routes = [
         component: ItemsComponent,
       },
       {
-        path: 'items/new',
+        path: 'new-item',
         component: ItemDetailsComponent
       },
       {

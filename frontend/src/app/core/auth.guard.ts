@@ -37,7 +37,8 @@ class AuthGuard {
   }
 
   private createRedirectUrlTree(url: string) {
-    return this.router.createUrlTree(['/login'], {queryParams: {redirectAfterLogin: url}});
+    const redirect = url === '/logout' ? '' : url;
+    return this.router.createUrlTree(['/login'], {queryParams: {redirectAfterLogin: redirect}});
   }
 }
 

@@ -15,7 +15,7 @@
   </ion-header>
 
   <ion-fab class="ion-margin" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="onAddItem()">
+    <ion-fab-button routerDirection="root" [routerLink]="['/dashboard/new-item']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -39,10 +39,12 @@ export class ItemDetailsComponent  implements OnInit, OnDestroy {
               private toastController: ToastController,
               private itemsService: ItemsService) {
     this.toastManager = new ToastManager(toastController);
-    this.setupForm();
+
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setupForm();
+  }
 
   ngOnDestroy() {
     this.errorMessage.next(null);
@@ -57,9 +59,9 @@ export class ItemDetailsComponent  implements OnInit, OnDestroy {
     });
   }
 
-  async onSave() {
+  public onSave() {
     if (!this.itemForm.valid) {
-      await this.toastManager.showErrorWithMessage('Some fields are not valid');
+      this.toastManager.showErrorWithMessage('Some fields are not valid');
       return;
     }
 
@@ -67,6 +69,7 @@ export class ItemDetailsComponent  implements OnInit, OnDestroy {
     this.itemsService.createNewItem(item).subscribe({
       next: () => {
         this.toastManager.showSavedSuccessfully();
+        this.setupForm();
         this.router.navigate(['dashboard', 'items']);
       },
       error: (err: HttpErrorResponse) => {

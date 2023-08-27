@@ -83,6 +83,7 @@ export class UsersComponent  implements OnInit, OnDestroy {
   private sendUserStatus(user: User, newStatusEnabled: boolean) {
     this.usersService.setUserStatus(user, !user.enabled).subscribe({
       next: (user) => {
+        this.toastManager.showSavedSuccessfully();
         this.reload();
       },
       error: (err) => {
