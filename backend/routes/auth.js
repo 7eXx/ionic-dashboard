@@ -4,6 +4,7 @@ const Joi = require("joi");
 const express = require("express");
 const auth = require("../middleware/auth");
 const dateFormatter = require("../utils/data-formatter");
+
 const router = express.Router();
 
 router.post("/login", async (req, res) => {

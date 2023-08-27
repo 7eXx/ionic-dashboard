@@ -98,6 +98,7 @@ export class NoteDetailComponent implements OnInit, AfterViewInit, OnDestroy {
           this.errorMessage.next(err.error.errorMessage);
         }
       });
+      return;
     }
 
     this.notesService.updateNote(this.note!._id, note).subscribe({

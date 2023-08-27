@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Joi = require("joi");
-const { string } = require("joi");
-const dateFormatter = require("../utils/data-formatter");
 
 const noteSchema = new Schema({
     title: {

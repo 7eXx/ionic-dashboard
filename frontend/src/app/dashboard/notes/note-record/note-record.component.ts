@@ -4,19 +4,17 @@ import {ModalController, ToastController} from "@ionic/angular";
 import {NoteDetailComponent} from "../note-detail/note-detail.component";
 
 @Component({
-  selector: 'app-note-item',
-  templateUrl: './note-item.component.html',
+  selector: 'app-note-record',
+  templateUrl: './note-record.component.html',
 })
-export class NoteItemComponent {
+export class NoteRecordComponent {
 
   @Input() note!: Note;
 
   @Output() deleteEmitter = new EventEmitter();
-
   @Output() saveSuccessEmitter = new EventEmitter();
 
-  constructor(private modalController: ModalController,
-              private toastController: ToastController) {
+  constructor(private modalController: ModalController) {
   }
 
   public onDelete(event: Event) {

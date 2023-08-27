@@ -29,10 +29,10 @@ export class NotesImplService extends NotesService {
     return this.httpClient.delete<any>(
       environment.url + '/notes',
       {
-        body: { id: noteId },
+        body: {id: noteId},
         withCredentials: true
       }
-    )
+    );
   }
 
   public override updateNote(noteId: string, note: NoteModel): Observable<Note> {

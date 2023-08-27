@@ -1,9 +1,10 @@
 
 const express = require("express");
-const router = express.Router();
 const auth = require("../middleware/auth");
 const { Note, validate } = require("../models/note");
 const dateFormatter = require("../utils/data-formatter");
+
+const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
     try {

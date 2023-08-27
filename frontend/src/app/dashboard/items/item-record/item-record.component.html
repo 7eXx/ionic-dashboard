@@ -1,0 +1,20 @@
+<ion-item>
+
+  <ion-label class="ion-margin-horizontal ion-text-wrap">
+    <h2>{{ item.title }}</h2>
+    <p>
+      {{ item.creationDatetime }}
+    </p>
+  </ion-label>
+  <ion-button slot="end" (click)="onTogglePublish()"
+              [title]="item.published ? 'Revoke' : 'Publish'"
+              [color]="item.published ? 'danger' : 'success'">
+    {{ item.published ? 'Revoke' : 'Publish' }}
+  </ion-button>
+  <ion-button slot="end" color="danger"
+            (click)="onDelete()"
+            title="Delete">
+    <ion-icon slot="icon-only" name="trash" style="margin: 5px"></ion-icon>
+  </ion-button>
+</ion-item>
+
