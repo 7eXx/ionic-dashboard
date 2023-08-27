@@ -1,0 +1,23 @@
+<ion-card [routerLink]="['/dashboard/users']">
+  <ion-card-header>
+    <ion-card-title>
+      <h2 class="fw-bold">{{ title }}</h2>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label class="fw-bold">Total: </ion-label>
+        <ion-badge slot="end">{{ users.length }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label class="fw-bold">Enabled: </ion-label>
+        <ion-badge slot="end" color="success">{{ enabledUsers.length }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label class="fw-bold">Disabled: </ion-label>
+        <ion-badge slot="end" color="danger">{{ disabledUsers.length }}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

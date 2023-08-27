@@ -1,0 +1,21 @@
+<ion-card (click)="onClickTile()" style="cursor: pointer">
+  <ion-card-header>
+    <ion-card-title>
+      <h2 class="fw-bold">{{ title }}</h2>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label class="fw-bold">Total: </ion-label>
+        <ion-badge slot="end">{{ notes.length }}</ion-badge>
+      </ion-item>
+    </ion-list>
+    <div class="d-flex justify-content-between align-items-center ion-padding">
+      <ion-label class="h5 fw-bold">Quick note</ion-label>
+      <ion-button (click)="onAddNote($event)">
+          <ion-icon name="add-circle"></ion-icon>
+        </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

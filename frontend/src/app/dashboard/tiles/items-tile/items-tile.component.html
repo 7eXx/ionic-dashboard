@@ -1,0 +1,23 @@
+<ion-card [routerLink]="['/dashboard/items']">
+  <ion-card-header>
+    <ion-card-title>
+      <h2 class="fw-bold">{{ title }}</h2>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label class="fw-bold">Total: </ion-label>
+        <ion-badge slot="end">{{ items.length }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label class="fw-bold">Published: </ion-label>
+        <ion-badge slot="end" color="success">{{ publishedItems.length }}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label class="fw-bold">Not published: </ion-label>
+        <ion-badge slot="end" color="danger">{{ notPublishedItems.length }}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
