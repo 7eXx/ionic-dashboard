@@ -36,7 +36,8 @@ export class UsersTileComponent  implements OnInit, OnDestroy {
         this.users = users;
         this.enabledUsers = users.filter((user) => user.enabled);
         this.disabledUsers = users.filter((user) => !user.enabled)
-      }
+      },
+      error: (err) => console.error(err),
     });
   }
 
