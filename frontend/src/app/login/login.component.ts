@@ -31,7 +31,6 @@ export class LoginComponent  implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.isLoginFailed.next(false);
   }
 
   private setupForm() {
@@ -42,6 +41,7 @@ export class LoginComponent  implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.isLoginFailed.next(false);
     if (this.loginSubscription) {
       this.loginSubscription.unsubscribe();
     }
@@ -63,6 +63,8 @@ export class LoginComponent  implements OnInit, OnDestroy {
         if (!isCredentialValid) {
           this.isLoginFailed.next(true);
         }
+        this.setupForm();
+        this.isLoginFailed.next(false);
       },
       error: () => {
         this.isLoginFailed.next(true);
@@ -81,6 +83,9 @@ export class LoginComponent  implements OnInit, OnDestroy {
   }
 
   async onRegisterUserModal() {
+    this.setupForm();
+    this.isLoginFailed.next(false);
+
     const modal = await this.modalController.create({
         component: RegisterUserComponent
     });
