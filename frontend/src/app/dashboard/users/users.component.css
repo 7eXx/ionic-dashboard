@@ -1,3 +1,11 @@
+table thead tr th {
+  background-color: var(--background);
+  color: var(--color);
+}
 
+table tbody tr td {
+  background-color: var(--background);
+  color: var(--color);
+}
 
 /*# sourceMappingURL=users.component.css.map */

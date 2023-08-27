@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -11,6 +11,8 @@ import {UsersComponent} from "./users/users.component";
 import {ItemsComponent} from "./items/items.component";
 import {NotesComponent} from "./notes/notes.component";
 import {LayoutContainerComponent} from "./layout-container/layout-container.component";
+import {NoteItemComponent} from "./notes/note-item/note-item.component";
+import {NoteDetailComponent} from "./notes/note-detail/note-detail.component";
 
 @NgModule({
   imports: [
@@ -18,6 +20,7 @@ import {LayoutContainerComponent} from "./layout-container/layout-container.comp
     FormsModule,
     IonicModule,
     DashboardPageRoutingModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     LayoutContainerComponent,
@@ -25,6 +28,8 @@ import {LayoutContainerComponent} from "./layout-container/layout-container.comp
     UsersComponent,
     ItemsComponent,
     NotesComponent,
+    NoteItemComponent,
+    NoteDetailComponent,
   ]
 })
 export class FolderPageModule {}

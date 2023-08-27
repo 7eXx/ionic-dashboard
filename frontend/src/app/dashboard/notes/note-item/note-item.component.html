@@ -1,0 +1,14 @@
+<ion-item (click)="onOpenNote()">
+  <div style="height: 90%; width: 50px" class="ion-padding"
+       [style.background-color]="note.color">
+  </div>
+  <ion-label class="ion-margin-horizontal ion-text-wrap">
+    <h2>{{ note.title }}</h2>
+    <p>
+      {{ note.creationDatetime }}
+    </p>
+  </ion-label>
+  <ion-button slot="end" color="danger" (click)="onDelete($event)">
+    <ion-icon slot="icon-only" name="trash" style="margin: 5px"></ion-icon>
+  </ion-button>
+</ion-item>

@@ -28,14 +28,6 @@ export class LayoutContainerComponent {
   }
 
   public onLogout() {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.menuController.close();
-        this.router.navigate(['/login'])
-      },
-      error: () => {
-        console.error("Error on logout");
-      }
-    })
+    this.router.navigate(['/logout']);
   }
 }

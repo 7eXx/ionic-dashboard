@@ -6,7 +6,8 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {RegisterUserComponent} from "./register-user/register-user.component";
 import {UsersService} from "../services/users.service";
 import {UsersImplService} from "../services/users-impl.service";
-import {ToastManager} from "./toast-manager.component";
+import {NotesService} from "../services/notes.service";
+import {NotesImplService} from "../services/notes-impl.service";
 
 @NgModule({
   imports: [
@@ -27,6 +28,10 @@ import {ToastManager} from "./toast-manager.component";
     {
       provide: UsersService,
       useClass: UsersImplService
+    },
+    {
+      provide: NotesService,
+      useClass: NotesImplService
     }
   ]
 })

@@ -15,7 +15,7 @@ const userSchema = new Schema({
     },
     creationDatetime: {
         type: String,
-        default: dateFormatter.formatCustom(new Date())
+        required: true
     },
     lastLoginDatetime: {
         type: String,

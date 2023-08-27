@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
         res.send({ id: user._id, email: user.email });
     } catch (error) {
         console.log(error);
-        res.send("An error occured");
+        res.status(500).send({ errorMessage: error.message });
     }
 });
 

@@ -28,7 +28,7 @@ export class UsersComponent  implements OnInit, OnDestroy {
   ngOnInit() {}
 
   ngOnDestroy() {
-    this.unsubscribeAll();
+    this.unsubscribeUsers();
   }
 
   private subscribeUsers() {
@@ -43,12 +43,8 @@ export class UsersComponent  implements OnInit, OnDestroy {
     }
   }
 
-  private unsubscribeAll() {
+  public reload() {
     this.unsubscribeUsers()
-  }
-
-  public refresh(ev: any) {
-    this.unsubscribeAll()
     this.subscribeUsers();
   }
 
@@ -56,12 +52,12 @@ export class UsersComponent  implements OnInit, OnDestroy {
     const modal = await this.modalController.create({
         component: RegisterUserComponent
     });
-    modal.present();
+    await modal.present();
 
     const { data, role } = await modal.onWillDismiss();
     if (role === 'confirm') {
-      this.toastManager.showSavedSuccessfully();
-      this.refresh({});
+      await this.toastManager.showSavedSuccessfully();
+      this.reload();
     }
   }
 
@@ -87,7 +83,7 @@ export class UsersComponent  implements OnInit, OnDestroy {
   private sendUserStatus(user: User, newStatusEnabled: boolean) {
     this.usersService.setUserStatus(user, !user.enabled).subscribe({
       next: (user) => {
-        this.refresh({});
+        this.reload();
       },
       error: (err) => {
         this.toastManager.showErrorWithMessage(err.error.errorMessage)

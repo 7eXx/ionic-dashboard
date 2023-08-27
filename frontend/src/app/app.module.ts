@@ -11,9 +11,14 @@ import {CoreModule} from "./core/core.module";
 import {LoginComponent} from "./login/login.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {LogoutComponent} from "./logout/logout.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    LogoutComponent
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
