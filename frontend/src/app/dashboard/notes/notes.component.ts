@@ -92,7 +92,7 @@ export class NotesComponent implements OnInit, OnDestroy {
       error: (err) => {
         this.toastManager.showErrorWithMessage(err.error.errorMessage);
       }
-    })
+    });
   }
 
   public onSaveSuccess() {

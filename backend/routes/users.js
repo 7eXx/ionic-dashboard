@@ -2,9 +2,20 @@ const { User, validate } = require("../models/user");
 const auth = require("../middleware/auth");
 const bcrypt = require("bcrypt");
 const express = require("express");
-const router = express.Router();
 const dateFormatter = require("../utils/data-formatter");
-const { boolean } = require("joi");
+
+const router = express.Router();
+
+router.get("/", auth, async (req, res) => {
+    try {
+        const users = await User.find();
+
+        res.send(users);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ errorMessage: error.message });
+    }
+});
 
 router.post("/", async (req, res) => {
     try {
@@ -35,24 +46,13 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.get("/", auth, async (req, res) => {
-    try {
-        const users = await User.find();
-
-        res.send(users);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({ errorMessage: error.message });
-    }
-});
-
 router.put("/status", auth, async (req, res) => {
     try {
         if (!req.body.hasOwnProperty('id') || !req.body.hasOwnProperty('enabled')) {
             return res.status(400).send({errorMessage: 'Change status missing arguments'});
         }
-        if (!req.body.enabled instanceof boolean) {
-            return res.status(400).send({errorMessage: 'Enable argument type not valid'});
+        if (!(typeof req.body.enabled === 'boolean')) {
+            return res.status(400).send({errorMessage: 'Argument type not valid'});
         }
 
         const findUser = await User.findById(req.body.id);

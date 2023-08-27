@@ -20,11 +20,11 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list *ngIf="notes.length > 0; else noElement">
-    <app-note-item *ngFor="let note of notes; let i = index"
+    <app-note-record *ngFor="let note of notes; let i = index"
                     [note]="note"
                    (deleteEmitter)="onDeleteItem(note)"
                    (saveSuccessEmitter)="onSaveSuccess()">
-    </app-note-item>
+    </app-note-record>
   </ion-list>
   <ng-template #noElement>
     <div class="ion-text-center ion-padding">

@@ -3,7 +3,7 @@ import {IonContent, ModalController} from "@ionic/angular";
 import {Note, NotesService} from "../../../services/notes.service";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {NoteModel} from "../../../datastructure/note.model";
+import {NoteModel} from "../../datastructure.model";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
@@ -52,7 +52,7 @@ export class NoteDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     this.noteForm = new FormGroup<any>({
       title: new FormControl(''),
       description: new FormControl(''),
-      color: new FormControl(this.defaultColor)
+      color: new FormControl('')
     });
   }
 
@@ -98,6 +98,7 @@ export class NoteDetailComponent implements OnInit, AfterViewInit, OnDestroy {
           this.errorMessage.next(err.error.errorMessage);
         }
       });
+      return;
     }
 
     this.notesService.updateNote(this.note!._id, note).subscribe({

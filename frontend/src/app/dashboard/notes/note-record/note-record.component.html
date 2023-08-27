@@ -3,12 +3,14 @@
        [style.background-color]="note.color">
   </div>
   <ion-label class="ion-margin-horizontal ion-text-wrap">
-    <h2>{{ note.title }}</h2>
+    <h2 class="fw-bold">{{ note.title }}</h2>
     <p>
       {{ note.creationDatetime }}
     </p>
   </ion-label>
-  <ion-button slot="end" color="danger" (click)="onDelete($event)">
+  <ion-button slot="end" color="danger"
+              (click)="onDelete($event)"
+              title="Delete">
     <ion-icon slot="icon-only" name="trash" style="margin: 5px"></ion-icon>
   </ion-button>
 </ion-item>

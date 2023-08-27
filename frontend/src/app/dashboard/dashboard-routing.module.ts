@@ -8,6 +8,7 @@ import {NotesComponent} from "./notes/notes.component";
 import {NotFoundComponent} from "../shared/not-found/not-found.component";
 import {canActivateAuth} from "../core/auth.guard";
 import {LayoutContainerComponent} from "./layout-container/layout-container.component";
+import {ItemDetailsComponent} from "./items/item-details/item-details.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'items',
         component: ItemsComponent,
+      },
+      {
+        path: 'items/new',
+        component: ItemDetailsComponent
       },
       {
         path: 'notes',

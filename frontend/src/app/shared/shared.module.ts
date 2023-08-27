@@ -8,6 +8,8 @@ import {UsersService} from "../services/users.service";
 import {UsersImplService} from "../services/users-impl.service";
 import {NotesService} from "../services/notes.service";
 import {NotesImplService} from "../services/notes-impl.service";
+import {ItemsService} from "../services/items.service";
+import {ItemsImplService} from "../services/items-impl.service";
 
 @NgModule({
   imports: [
@@ -32,6 +34,10 @@ import {NotesImplService} from "../services/notes-impl.service";
     {
       provide: NotesService,
       useClass: NotesImplService
+    },
+    {
+      provide: ItemsService,
+      useClass: ItemsImplService
     }
   ]
 })
