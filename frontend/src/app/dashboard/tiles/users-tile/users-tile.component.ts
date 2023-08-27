@@ -1,32 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User, UsersService} from "../../../services/users.service";
-import {filter, map, Observable} from "rxjs";
+import {filter, map, Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-users-tile',
   templateUrl: './users-tile.component.html',
   styleUrls: ['./users-tile.component.scss'],
 })
-export class UsersTileComponent  implements OnInit {
+export class UsersTileComponent  implements OnInit, OnDestroy {
 
   title = 'Users';
 
-  usersObs!: Observable<User[]>;
+  users: User[] = [];
 
-  enabledUsersObs!: Observable<User[]>;
-  disabledUsersObs!: Observable<User[]>;
+  enabledUsers: User[] = [];
+  disabledUsers: User[] = [];
 
-  constructor(private usersService: UsersService) { }
+  usersSubscription!: Subscription;
 
-  ngOnInit() {
-    this.usersObs = this.usersService.getUsers();
-    this.enabledUsersObs = this.extractUsersByState(this.usersObs, true);
-    this.disabledUsersObs = this.extractUsersByState(this.usersObs, false);
+  constructor(private usersService: UsersService) {
   }
 
-  private extractUsersByState(users: Observable<User[]>, enableState: boolean) {
-    return users.pipe(
-      map((users) => users.filter((user) => user.enabled === enableState))
-    )
+  ngOnInit() {
+    this.subscribeUsers();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeUsers();
+  }
+
+  private subscribeUsers() {
+    this.unsubscribeUsers();
+    this.usersSubscription = this.usersService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+        this.enabledUsers = users.filter((user) => user.enabled);
+        this.disabledUsers = users.filter((user) => !user.enabled)
+      }
+    });
+  }
+
+  private unsubscribeUsers() {
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
+    }
   }
 }
