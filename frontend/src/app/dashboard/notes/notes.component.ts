@@ -1,10 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertController, ModalController, ToastController} from "@ionic/angular";
 import {Note, NotesService} from "../../services/notes.service";
 import {Subscription} from "rxjs";
 import {NoteDetailComponent} from "./note-detail/note-detail.component";
 import {ToastManager} from "../../shared/toast-manager.component";
-import {reload} from "ionicons/icons";
 
 @Component({
   selector: 'app-notes',
