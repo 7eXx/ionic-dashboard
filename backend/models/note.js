@@ -19,6 +19,10 @@ const noteSchema = new Schema({
         type: String,
         required: true
     },
+    userId:  {
+        type: String,
+        required: true
+    },
     owner: {
         type: String,
         default: '',
@@ -33,6 +37,7 @@ const validate = (note) => {
         description: Joi.string().optional().allow(''),
         color: Joi.string().optional().allow(''),
         creationDatetime: Joi.string(),
+        userId: Joi.string().optional(),
         owner: Joi.string(),
     });
     return schema.validate(note);

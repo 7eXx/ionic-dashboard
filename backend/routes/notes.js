@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
     try {
-        const notes = await Note.find({ owner: req.session.user.email });
+        const notes = await Note.find({ userId: req.session.user._id });
 
         res.send(notes);
     } catch (error) {
@@ -28,6 +28,7 @@ router.post("/", auth, async (req, res) => {
 
         const note = new Note(req.body);
         note.creationDatetime = dateFormatter.formatCustom(new Date());
+        note.userId = req.session.user._id;
         note.owner = req.session.user.email;
 
         await note.save();
