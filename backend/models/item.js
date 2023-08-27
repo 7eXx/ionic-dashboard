@@ -32,7 +32,7 @@ const validate = (item) => {
     const schema = Joi.object({
         title: Joi.string().required(),
         content: Joi.string().required(),
-        link: Joi.string(),
+        link: Joi.string().allow('').optional(),
         creationDatetime: Joi.string(),
         published: Joi.boolean()
     });

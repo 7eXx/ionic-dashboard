@@ -47,7 +47,7 @@ router.delete("/", auth, async (req, res) => {
         return res.status(400).send({errorMessage: 'Item not found'});
     }
 
-    await Item.findByIdAndUpdate(findItem._id);
+    await Item.findByIdAndDelete(findItem._id);
 
     res.send();
 });

@@ -3,6 +3,7 @@ import {Item, ItemsService} from "./items.service";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {ItemModel} from "../dashboard/datastructure.model";
 
 @Injectable()
 export class ItemsImplService extends ItemsService {
@@ -28,6 +29,15 @@ export class ItemsImplService extends ItemsService {
         withCredentials: true
       }
     )
+  }
+
+  public override createNewItem(item: ItemModel): Observable<Item> {
+    return this.httpClient.post<Item>(
+      environment.url + '/items',
+      item, {
+        withCredentials: true
+      }
+    );
   }
 
   public override setPublishStatus(item: Item, newPublishStatus: boolean) {

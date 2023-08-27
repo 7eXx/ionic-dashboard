@@ -1,7 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularEditorConfig} from "@kolkov/angular-editor";
+import {ItemsService} from "../../../services/items.service";
+import {ItemModel} from "../../datastructure.model";
+import {ToastController} from "@ionic/angular";
+import {ToastManager} from "../../../shared/toast-manager.component";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-item-details',
@@ -20,14 +26,19 @@ export class ItemDetailsComponent  implements OnInit, OnDestroy {
     enableToolbar: true,
     showToolbar: true,
     placeholder: 'Enter text here...',
-    sanitize: false,
+    sanitize: true,
   };
+
+  toastManager: ToastManager;
 
   errorMessage = new BehaviorSubject<string | null>(null);
 
   itemForm!: FormGroup<any>;
 
-  constructor() {
+  constructor(private router: Router,
+              private toastController: ToastController,
+              private itemsService: ItemsService) {
+    this.toastManager = new ToastManager(toastController);
     this.setupForm();
   }
 
@@ -39,14 +50,28 @@ export class ItemDetailsComponent  implements OnInit, OnDestroy {
 
   private setupForm() {
     this.itemForm = new FormGroup<any>({
-      title: new FormControl(''),
-      content: new FormControl(''),
+      title: new FormControl('', [Validators.required]),
+      content: new FormControl('', [Validators.required]),
       link: new FormControl(''),
       published: new FormControl(false)
     });
   }
 
-  public onSave() {
-    console.log(this.itemForm.value);
+  async onSave() {
+    if (!this.itemForm.valid) {
+      await this.toastManager.showErrorWithMessage('Some fields are not valid');
+      return;
+    }
+
+    const item = this.itemForm.value as ItemModel;
+    this.itemsService.createNewItem(item).subscribe({
+      next: () => {
+        this.toastManager.showSavedSuccessfully();
+        this.router.navigate(['dashboard', 'items']);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.toastManager.showErrorWithMessage(err.error.errorMessage);
+      }
+    });
   }
 }
