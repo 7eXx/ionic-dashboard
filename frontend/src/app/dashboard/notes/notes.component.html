@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Notes</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Notes</ion-title>
+      <ion-title size="large">{{ title }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -29,7 +29,7 @@
   <ng-template #noElement>
     <div class="ion-text-center ion-padding">
       <ion-text color="primary">
-        <h2>No notes found yet.</h2>
+        <h2>{{ title }} not found yet.</h2>
       </ion-text>
     </div>
   </ng-template>

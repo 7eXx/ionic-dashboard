@@ -13,10 +13,13 @@ import {Router} from "@angular/router";
 })
 export class ItemsComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  title = 'Items';
+
   private toastManager: ToastManager;
 
   items: Array<Item> = [];
   itemsSubscription?: Subscription;
+
 
   constructor(private router: Router,
               private toastController: ToastController,
