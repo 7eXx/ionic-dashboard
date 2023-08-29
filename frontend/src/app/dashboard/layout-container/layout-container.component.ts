@@ -1,9 +1,10 @@
 import {Component} from "@angular/core";
-import {AuthService, SessionInfo} from "../../core/auth.service";
+import {AuthService, SessionData} from "../../core/auth.service";
 import {Router} from "@angular/router";
 import {User} from "../../services/users.service";
 import {Observable} from "rxjs";
 import {MenuController} from "@ionic/angular";
+import {SessionService} from "../../core/session.service";
 
 @Component({
   selector: 'app-layout-container',
@@ -19,12 +20,12 @@ export class LayoutContainerComponent {
     { title: 'Notes', url: '/dashboard/notes', icon: 'documents' }
   ];
 
-  sessionInfo!: Observable<SessionInfo | null>;
+  sessionData!: Observable<SessionData | null>;
 
   constructor(private router: Router,
-              private authService: AuthService,
+              private session: SessionService,
               private menuController: MenuController) {
-    this.sessionInfo = this.authService.getSessionInfo();
+    this.sessionData = this.session.getData();
   }
 
   public onLogout() {

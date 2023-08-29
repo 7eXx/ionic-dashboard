@@ -1,14 +1,21 @@
-import {NgModule, Optional, SkipSelf} from "@angular/core";
-import {AuthService} from "./auth.service";
+import {NgModule, Optional, Provider, SkipSelf} from "@angular/core";
 import {throwIfAlreadyLoaded} from "./module-import-guard";
-import {AuthImplService} from "./auth-impl.service";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {UserNotLoggedInterceptor} from "./user-not-logged-interceptor.service";
+import {AuthService} from "./auth.service";
+
+const httpInterceptorProviders: Provider[] = [{
+  provide: HTTP_INTERCEPTORS,
+  useClass: UserNotLoggedInterceptor,
+  multi: true
+}];
 
 @NgModule({
+  imports: [
+    HttpClientModule,
+  ],
   providers: [
-    {
-      provide: AuthService,
-      useClass: AuthImplService
-    }
+    httpInterceptorProviders
   ]
 })
 export class CoreModule {
@@ -16,3 +23,5 @@ export class CoreModule {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 }
+
+

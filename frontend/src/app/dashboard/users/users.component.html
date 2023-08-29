@@ -4,14 +4,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Users</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Users</ion-title>
+      <ion-title size="large">{{ title }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-fab class="ion-margin" slot="fixed" vertical="bottom" horizontal="end">
@@ -52,7 +52,7 @@
   <ng-template #noElement>
     <div class="d-flex justify-content-center align-items-center">
       <ion-text color="primary">
-        <h2>No users found.</h2>
+        <h2>{{ title }} found.</h2>
       </ion-text>
     </div>
   </ng-template>

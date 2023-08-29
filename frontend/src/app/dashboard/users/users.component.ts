@@ -10,12 +10,15 @@ import {ToastManager} from "../../shared/toast-manager.component";
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent  implements OnInit, OnDestroy {
+export class UsersComponent implements OnInit, OnDestroy {
+
+  title = 'Users';
 
   toastManager: ToastManager;
 
   users: Array<User> = [];
   usersSubscription?: Subscription;
+
 
   constructor(private modalController: ModalController,
               private toastController: ToastController,
@@ -25,7 +28,8 @@ export class UsersComponent  implements OnInit, OnDestroy {
     this.subscribeUsers();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ngOnDestroy() {
     this.unsubscribeUsers();
@@ -34,7 +38,7 @@ export class UsersComponent  implements OnInit, OnDestroy {
   private subscribeUsers() {
     this.unsubscribeUsers();
     this.usersSubscription = this.usersService.getUsers()
-        .subscribe((users) => this.users = users);
+      .subscribe((users) => this.users = users);
   }
 
   private unsubscribeUsers() {
@@ -50,11 +54,11 @@ export class UsersComponent  implements OnInit, OnDestroy {
 
   async onAddNewUser() {
     const modal = await this.modalController.create({
-        component: RegisterUserComponent
+      component: RegisterUserComponent
     });
     await modal.present();
 
-    const { data, role } = await modal.onWillDismiss();
+    const {data, role} = await modal.onWillDismiss();
     if (role === 'confirm') {
       await this.toastManager.showSavedSuccessfully();
       this.reload();

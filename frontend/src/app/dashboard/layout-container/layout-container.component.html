@@ -3,7 +3,7 @@
     <ion-content>
       <ion-list id="dashboard-list">
         <ion-list-header>Dashboard</ion-list-header>
-        <ion-note *ngIf="(sessionInfo | async) as session">{{ session.email }}</ion-note>
+        <ion-note *ngIf="(sessionData | async) as session">{{ session.email }}</ion-note>
 
         <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
           <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">

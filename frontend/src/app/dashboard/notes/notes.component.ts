@@ -12,10 +12,13 @@ import {ToastManager} from "../../shared/toast-manager.component";
 })
 export class NotesComponent implements OnInit, OnDestroy {
 
+  title = 'Notes';
+
   private toastManager: ToastManager
 
   notes: Array<Note> = [];
   notesSubscription?: Subscription;
+
 
   constructor(private  toastController: ToastController,
               private alertController: AlertController,

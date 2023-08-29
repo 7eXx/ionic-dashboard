@@ -6,6 +6,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ModalController, ToastController} from "@ionic/angular";
 import {RegisterUserComponent} from "../shared/register-user/register-user.component";
 import {ToastManager} from "../shared/toast-manager.component";
+import {SessionService} from "../core/session.service";
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent  implements OnInit, OnDestroy {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private authService: AuthService,
+              private sessionService: SessionService,
               private modalController: ModalController,
               private toastController: ToastController) {
     this.toastManager = new ToastManager(toastController);
@@ -48,7 +50,7 @@ export class LoginComponent  implements OnInit, OnDestroy {
   }
 
   private setupLoginSubscription() {
-    this.loginSubscription = this.authService.getSessionInfo().pipe(
+    this.loginSubscription = this.sessionService.getData().pipe(
       filter((userData) => userData != null),
       switchMap(() => this.route.queryParams),
       map((params) => this.redirectUrl(params))
