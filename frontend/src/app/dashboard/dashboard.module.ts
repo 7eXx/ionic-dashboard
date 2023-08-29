@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DashboardPageRoutingModule } from './dashboard-routing.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import {HomeComponent} from "./home/home.component";
 import {UsersComponent} from "./users/users.component";
@@ -24,9 +24,9 @@ import {NotesTileComponent} from "./tiles/notes-tile/notes-tile.component";
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    DashboardPageRoutingModule,
     ReactiveFormsModule,
+    IonicModule,
+    DashboardRoutingModule,
     AngularEditorModule
   ],
   declarations: [
@@ -42,6 +42,7 @@ import {NotesTileComponent} from "./tiles/notes-tile/notes-tile.component";
     UsersTileComponent,
     ItemsTileComponent,
     NotesTileComponent
-  ]
+  ],
+  providers: []
 })
-export class FolderPageModule {}
+export class DashboardModule {}
