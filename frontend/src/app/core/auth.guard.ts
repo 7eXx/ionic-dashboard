@@ -9,6 +9,7 @@ import {
   UrlTree
 } from "@angular/router";
 import {map, Observable, of} from "rxjs";
+import {SessionService} from "./session.service";
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ class AuthGuard {
 
   private isLoggedIn!: Observable<boolean>;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private sessionService: SessionService, private router: Router) {
     this.computeLogin();
   }
 
@@ -26,8 +27,8 @@ class AuthGuard {
   }
 
   private computeLogin() {
-    this.isLoggedIn = this.authService.getSessionInfo().pipe(
-      map((sessionInfo) => sessionInfo !== null));
+    this.isLoggedIn = this.sessionService.getData().pipe(
+      map((userData) => userData !== null));
   }
 
   private enforceLoginToAccess(url: string): Observable<boolean | UrlTree> {

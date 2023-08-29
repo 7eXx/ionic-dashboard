@@ -8,12 +8,13 @@ import {canActivateAuth} from "./core/auth.guard";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard/home',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [canActivateAuth],
   },
   {
     path: 'login',

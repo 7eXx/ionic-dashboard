@@ -1,12 +1,12 @@
 import {NgModule, Optional, Provider, SkipSelf} from "@angular/core";
 import {throwIfAlreadyLoaded} from "./module-import-guard";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthInterceptor} from "./auth.interceptor";
+import {UserNotLoggedInterceptor} from "./user-not-logged-interceptor.service";
 import {AuthService} from "./auth.service";
 
 const httpInterceptorProviders: Provider[] = [{
   provide: HTTP_INTERCEPTORS,
-  useClass: AuthInterceptor,
+  useClass: UserNotLoggedInterceptor,
   multi: true
 }];
 
@@ -15,7 +15,6 @@ const httpInterceptorProviders: Provider[] = [{
     HttpClientModule,
   ],
   providers: [
-    AuthService,
     httpInterceptorProviders
   ]
 })

@@ -1,9 +1,10 @@
-import {catchError, map, Observable, of, ReplaySubject, Subject, tap} from "rxjs";
+import {catchError, map, Observable, of, ReplaySubject, share, Subject, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {SessionInfo, SessionService} from "./session.service";
 
-export interface SessionInfo {
+export interface SessionData {
   _id: string;
   email: string;
   creationDatetime: string;
@@ -14,51 +15,41 @@ export interface AuthEvent {
   type: 'LOGIN_SUCCESS' | 'LOGIN_FAILURE' | 'LOGOUT' | 'VALID_SESSION' | 'INVALID_SESSION';
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
-  private sessionInfo = new ReplaySubject<SessionInfo | null>(1);
-  private authEvents = new Subject<AuthEvent | null>();
-
-  constructor(private httpClient: HttpClient) {
-    console.log('AuthService constructor');
+  constructor(private httpClient: HttpClient, private sessionService: SessionService) {
     this.updateSessionInfo().subscribe();
   }
 
-  public updateSessionInfo(): Observable<SessionInfo | null> {
+  public updateSessionInfo(): Observable<SessionData | null> {
     return this.updateSessionInfoAndEmit({ type: 'VALID_SESSION'} , { type: 'INVALID_SESSION'});
   }
 
-  private updateSessionInfoAndEmit(successEvent: AuthEvent, failureEvent: AuthEvent) {
-    const request = this.httpClient.get<SessionInfo>(environment.url + '/users/me', {
+  private updateSessionInfoAndEmit(successEvent: AuthEvent, failureEvent: AuthEvent): Observable<SessionData | null> {
+    const request = this.httpClient.get<SessionData>(environment.url + '/users/me', {
       withCredentials: true
     });
 
     return request.pipe(
-      tap((sessionInfo) => this.setSessionInfoAndEmit(sessionInfo, successEvent)),
+      tap((sessionData) => this.sessionService.pushSessionInfoAuthEvent(sessionData, successEvent)),
       catchError((error) => {
         // TODO: notify user eventually not valid session
-        this.setSessionInfoAndEmit(null, failureEvent);
+        this.sessionService.pushSessionInfoAuthEvent(null, failureEvent);
 
         return of(null);
       })
     );
   }
 
-  public getSessionInfo(): Observable<SessionInfo | null> {
-    return this.sessionInfo.asObservable();
-  }
-
-  public getAuthEvents(): Observable<AuthEvent | null> {
-    return this.authEvents.asObservable();
-  }
-
-  public login(credentials: { email: string; password: string }): Observable<SessionInfo | null> {
+  public login(credentials: { email: string; password: string }): Observable<SessionData | null> {
     const loginObservable = this.postLogin(credentials).pipe(
-      //share(),
+      share(),
       tap({
-        next: (sessionInfo) => this.setSessionInfoAndEmit(sessionInfo, {type: 'LOGIN_SUCCESS'}),
-        error: (err) => this.setSessionInfoAndEmit(null, {type: 'LOGIN_FAILURE'})
+        next: (sessionInfo) => this.sessionService.pushSessionInfoAuthEvent(sessionInfo, {type: 'LOGIN_SUCCESS'}),
+        error: (err) => this.sessionService.pushSessionInfoAuthEvent(null, {type: 'LOGIN_FAILURE'})
       })
     );
 
@@ -75,16 +66,11 @@ export class AuthService {
     );
   }
 
-  private setSessionInfoAndEmit(sessionInfo: SessionInfo | null, authEvent: AuthEvent) {
-    this.sessionInfo.next(sessionInfo);
-    this.authEvents.next(authEvent);
-  }
-
   public logout(): Observable<boolean> {
     return this.httpClient.get<any>(environment.url + '/auth/logout', {withCredentials: true}).pipe(
       map(() => true),
       tap(() => {
-        this.setSessionInfoAndEmit(null, {type: 'LOGOUT'});
+        this.sessionService.pushSessionInfoAuthEvent(null, {type: 'LOGOUT'});
       })
     );
   }
